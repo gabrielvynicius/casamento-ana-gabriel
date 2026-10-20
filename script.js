@@ -49,72 +49,25 @@ function initializeScrollReveal() {
  * - 950 ms: aguarda a abertura do envelope;
  * - 350 ms: aguarda um pouco antes de rolar até o convite.
  */
-function initializeEnvelope() {
-  const envelope = document.getElementById('envelope');
-  const invitation = document.getElementById('invitation');
-  const hint = document.getElementById('hint');
-
-  envelope.addEventListener('click', () => {
-    // Evita repetir a animação em cliques posteriores.
-    if (envelope.classList.contains('open')) {
-      return;
-    }
-
-    envelope.classList.add('open');
-    hint.textContent = 'Com carinho, para você ♡';
-
-    // Primeiro deixa a carta visível; depois ativa sua transição de entrada.
-    setTimeout(() => {
-      invitation.style.display = 'block';
-
-      requestAnimationFrame(() => {
-        invitation.classList.add('show');
-      });
-
-      // Centraliza o convite na tela para facilitar a leitura.
-      setTimeout(() => {
-        invitation.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 350);
-    }, 950);
-  });
-}
-
-// -----------------------------------------------------------------------
-// 03. Confirmação de presença pelo WhatsApp
-// -----------------------------------------------------------------------
-
-/**
- * Pede o nome e a resposta do convidado.
- * Depois, abre o WhatsApp com uma mensagem previamente preenchida.
- *
- * Importante: o usuário ainda precisa escolher um contato e enviar
- * a mensagem. Este botão não envia mensagens automaticamente.
- */
+// Redirecionamento direto para confirmação pelo WhatsApp
 function initializeRsvp() {
   const rsvpButton = document.getElementById('rsvp');
 
   rsvpButton.addEventListener('click', () => {
-    const name = prompt('Qual é o seu nome para a confirmação?');
 
-    // Cancelar a pergunta ou deixar o nome vazio encerra a operação.
-    if (!name) {
-      return;
-    }
+    // Mensagem automática de confirmação
+    const message = 
+      'Olá, Ana Claudia e Gabriel! 💙 Confirmo minha presença no casamento de vocês em 06/02/2027!';
 
-    const going = confirm(
-      'Você poderá comparecer ao casamento?\n\n' +
-      'OK = Vou comparecer\n' +
-      'Cancelar = Não poderei ir'
-    );
+    // Número que receberá as confirmações
+    const phone = '5561981798938';
 
-    const message = going
-      ? `Olá, Gabriel e Ana! Aqui é ${name}. Confirmo minha presença no casamento de vocês em 06/02/2027! 💙`
-      : `Olá, Gabriel e Ana! Aqui é ${name}. Infelizmente não poderei comparecer ao casamento, mas desejo muitas felicidades! 💙`;
+    // Cria o link do WhatsApp com a mensagem preenchida
+    const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
-    // encodeURIComponent permite usar caracteres especiais na URL.
-    const whatsappUrl = 'https://wa.me/5561981798938?s=p' + encodeURIComponent(message);
+    // Redireciona diretamente, sem popups
+    window.location.href = whatsappUrl;
 
-    window.open(whatsappUrl, '_blank', 'noopener');
   });
 }
 
