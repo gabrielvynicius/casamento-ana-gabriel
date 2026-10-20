@@ -1,0 +1,625 @@
+/* ======================================================================
+   CONVITE DE CASAMENTO — ANA CLAUDIA & GABRIEL
+   Arquivo: styles.css
+
+   Organização:
+   01. Fontes, cores e configurações globais
+   02. Estrutura principal e abertura
+   03. Textos e capítulos da história
+   04. Fotos e vídeos
+   05. Envelope animado
+   06. Convite revelado e botões
+   07. Rodapé e animações de entrada
+   08. Acessibilidade e responsividade
+
+   Os valores visuais originais foram preservados.
+   ====================================================================== */
+
+/* ----------------------------------------------------------------------
+   01. Fontes, cores e configurações globais
+   ---------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap');
+
+:root {
+  /* Paleta de cores do convite */
+  --ink: #25465e;
+  --blue: #a5c8e4;
+  --pale: #eaf4fc;
+  --paper: #fffdfb;
+  --muted: #6d8596;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #eef5fa;
+  color: var(--ink);
+  font-family: 'DM Sans', Arial, sans-serif;
+  line-height: 1.7;
+}
+
+/* Luzes suaves ao fundo, por trás de todo o conteúdo. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 10% 10%, #fff9 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 90%, #d4e9f9 0%, transparent 55%);
+  z-index: -1;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+.serif {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(57px, 13vw, 75px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin: 12px 0 20px;
+}
+
+h2 {
+  font-size: clamp(37px, 9vw, 48px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin: 16px 0;
+}
+
+h3 {
+  font-size: 29px;
+  line-height: 1.24;
+  margin: 14px 0;
+}
+
+/* ----------------------------------------------------------------------
+   02. Estrutura principal e abertura
+   ---------------------------------------------------------------------- */
+.site {
+  max-width: 530px;
+  margin: auto;
+  background: var(--paper);
+  box-shadow: 0 8px 70px #7d9db326;
+  overflow: hidden;
+}
+
+.hero {
+  min-height: 95svh;
+  padding: 58px 25px 35px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(175deg, #f5faff, #fff 60%, #e8f4fb);
+  position: relative;
+}
+
+.eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #7899b2;
+}
+
+.ornament {
+  font-size: 32px;
+  color: #93b9d5;
+  font-family: Georgia, serif;
+  margin: 16px 0;
+}
+
+.hero p {
+  max-width: 300px;
+  margin: 0 auto;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.date-pill {
+  display: inline-block;
+  border-top: 1px solid #a4c5db;
+  border-bottom: 1px solid #a4c5db;
+  margin: 24px 0 32px;
+  padding: 10px 18px;
+  letter-spacing: 0.13em;
+  font-size: 12px;
+}
+
+.down {
+  font-size: 25px;
+  margin-top: 22px;
+  color: #88acc6;
+  animation: float 2s infinite;
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+/* ----------------------------------------------------------------------
+   03. Textos e capítulos da história
+   ---------------------------------------------------------------------- */
+section.story {
+  padding: 78px 28px 22px;
+  text-align: center;
+}
+
+.chapter {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  font-weight: 700;
+  color: #8db1c9;
+  text-transform: uppercase;
+}
+
+.story p {
+  font-size: 15px;
+  max-width: 415px;
+  margin: 16px auto;
+  color: #526c7e;
+}
+
+.story strong {
+  color: #2f5d7b;
+}
+
+.line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #bbd5e8, transparent);
+  margin: 30px auto;
+  max-width: 170px;
+}
+
+.quote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 23px !important;
+  line-height: 1.5;
+  color: #3b627f !important;
+}
+
+/* Fundo azul alternado para diferenciar visualmente os capítulos. */
+.blue-section {
+  background: linear-gradient(180deg, #f2f8fd, #e7f2fb);
+  padding-bottom: 65px !important;
+}
+
+.closing {
+  background: #eaf4fc;
+  padding-bottom: 75px !important;
+}
+
+.closing h2 {
+  font-size: 43px;
+}
+
+/* ----------------------------------------------------------------------
+   04. Fotos e vídeos
+   IMPORTANTE: os arquivos precisam existir na pasta assets/.
+   ---------------------------------------------------------------------- */
+.media-card {
+  border-radius: 16px;
+  overflow: hidden;
+  margin: 24px auto 12px;
+  max-width: 405px;
+  background: #e8f2fa;
+  position: relative;
+  border: 1px solid #c8deec;
+}
+
+/* Elemento visual reservado para cards sem uma mídia carregada. */
+.media-art {
+  min-height: 214px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 9px;
+  background: linear-gradient(145deg, #d8eaf7, #f5f9fd 48%, #bfd9ec);
+  color: #5b89a9;
+  padding: 22px;
+}
+
+.media-art svg {
+  width: 35px;
+  height: 35px;
+  opacity: 0.7;
+}
+
+.media-art small {
+  font-size: 12px;
+  letter-spacing: 0.09em;
+  font-weight: 600;
+}
+
+.media-art em {
+  font-size: 11px;
+  font-style: normal;
+  opacity: 0.8;
+}
+
+.media-card img,
+.media-card video {
+  display: none;
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+}
+
+.media-card.has-media img,
+.media-card.has-media video {
+  display: block;
+}
+
+.media-card.has-media .media-art {
+  display: none;
+}
+
+/* Aparência de fotos/vídeos presentes no site. Mantida do código original. */
+.media-card.has-media {
+  box-shadow: 0 14px 36px #456e8c1b;
+  border: 7px solid #fff;
+  background: #fff;
+}
+
+.media-card.has-media img,
+.media-card.has-media video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  border-radius: 9px;
+  background: #e9f2f8;
+}
+
+.media-card.has-media video {
+  max-height: 580px;
+}
+
+.media-tools {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background: #f3f8fc;
+}
+
+.add-media {
+  background: transparent;
+  border: 0;
+  color: #4c7896;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.media-caption {
+  margin: 9px auto 34px !important;
+  font-size: 12px !important;
+  color: #8195a3 !important;
+  font-style: italic;
+}
+
+.photo-intro {
+  max-width: 330px;
+  margin: 25px auto 0;
+  border: 9px solid white;
+  box-shadow: 0 14px 35px #507b9b28;
+  transform: rotate(-1deg);
+}
+
+.photo-intro img {
+  width: 100%;
+  display: block;
+}
+
+.ending-photo {
+  margin-top: 28px;
+}
+
+/* Estilos auxiliares mantidos para eventual uso em outros capítulos. */
+.memory-number {
+  font-family: Georgia, serif;
+  font-size: 60px;
+  line-height: 1;
+  color: #aecfe4;
+  margin: 32px 0 0;
+}
+
+.mini-title {
+  margin-top: 3px !important;
+}
+
+/* ----------------------------------------------------------------------
+   05. Envelope animado
+   A classe .open é adicionada pelo JavaScript quando o convidado clica.
+   ---------------------------------------------------------------------- */
+.envelope-stage {
+  min-height: 290px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0 0;
+  perspective: 800px;
+}
+
+.envelope {
+  width: min(310px, 86vw);
+  height: 195px;
+  position: relative;
+  border: 0;
+  background: transparent;
+  filter: drop-shadow(0 15px 15px #799eba3b);
+  transition: transform 0.4s;
+}
+
+.env-back {
+  position: absolute;
+  inset: 0;
+  background: #a6cce7;
+  border-radius: 5px;
+}
+
+.env-letter {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 11px;
+  height: 155px;
+  background: #fffefa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: transform 1s 0.35s;
+  border: 1px solid #d6e6f2;
+  box-shadow: 0 1px 7px #7192a633;
+}
+
+.env-letter span {
+  font-family: Georgia, serif;
+  font-size: 20px;
+}
+
+.env-letter small {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+
+.env-front {
+  position: absolute;
+  inset: 0;
+  background: #bddbf0;
+  clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
+  z-index: 3;
+}
+
+.env-flap {
+  position: absolute;
+  inset: 0;
+  background: #9dbfdb;
+  clip-path: polygon(0 0, 100% 0, 50% 58%);
+  transform-origin: 50% 0;
+  transition: transform 0.75s;
+  z-index: 4;
+}
+
+.env-seal {
+  position: absolute;
+  z-index: 5;
+  top: 94px;
+  left: calc(50% - 21px);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #fffdf8;
+  color: #729fbe;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  box-shadow: 0 3px 8px #50799a33;
+  transition: opacity 0.3s;
+}
+
+/* Estado de abertura: a aba gira, o selo some e a carta sobe. */
+.envelope.open .env-flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope.open .env-seal {
+  opacity: 0;
+}
+
+.envelope.open .env-letter {
+  transform: translateY(-93px);
+  z-index: 2;
+}
+
+.envelope.open {
+  transform: translateY(25px);
+}
+
+.envelope-hint {
+  font-size: 12px !important;
+  color: #7899b0 !important;
+}
+
+/* ----------------------------------------------------------------------
+   06. Convite revelado e botões
+   A classe .show é adicionada após a animação do envelope.
+   ---------------------------------------------------------------------- */
+.invitation {
+  display: none;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.8s, transform 0.8s;
+  margin: 24px 0 0;
+  padding: 32px 18px;
+  background: #fff;
+  border: 1px solid #c4dcea;
+  outline: 6px solid #f4f9fc;
+  box-shadow: 0 10px 25px #829cb015;
+}
+
+.invitation.show {
+  display: block;
+  opacity: 1;
+  transform: none;
+}
+
+.invitation h2 {
+  font-size: 45px;
+  margin: 16px 0;
+}
+
+.invitation .amp {
+  font-family: Georgia, serif;
+  color: #9dc0d9;
+  font-style: italic;
+  font-size: 36px;
+}
+
+.big-date {
+  font-family: Georgia, serif;
+  font-size: 70px;
+  line-height: 1.15;
+}
+
+.invitation .details {
+  font-size: 14px;
+  color: #46687f;
+}
+
+.actions {
+  display: grid;
+  gap: 11px;
+  margin-top: 24px;
+}
+
+.actions .pill {
+  width: 100%;
+}
+
+.pill,
+.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 46px;
+  border: 1px solid #8eafc9;
+  background: #729ebd;
+  color: #fff;
+  border-radius: 40px;
+  padding: 11px 24px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.03em;
+  transition: transform 0.2s;
+}
+
+.pill:active,
+.primary:active {
+  transform: scale(0.97);
+}
+
+.secondary {
+  background: transparent;
+  color: var(--ink);
+}
+
+.invitation-message {
+  font-size: 12px !important;
+  margin-top: 24px !important;
+}
+
+/* ----------------------------------------------------------------------
+   07. Rodapé e animação dos capítulos
+   ---------------------------------------------------------------------- */
+.footer {
+  padding: 23px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: #7b9bb1;
+  background: #f6fafc;
+}
+
+/* O JavaScript marca os capítulos vistos com a classe .visible. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ----------------------------------------------------------------------
+   08. Acessibilidade e responsividade
+   ---------------------------------------------------------------------- */
+/* Respeita a preferência do visitante por menos movimento. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Em telas maiores, apresenta o convite como uma folha centralizada. */
+@media (min-width: 600px) {
+  .site {
+    margin: 24px auto;
+    border-radius: 20px;
+  }
+}
+
+/* Ajuste de espaçamento em celulares pequenos. */
+@media (max-width: 480px) {
+  section.story {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .story p {
+    font-size: 15px;
+  }
+}
