@@ -49,6 +49,47 @@ function initializeScrollReveal() {
  * - 950 ms: aguarda a abertura do envelope;
  * - 350 ms: aguarda um pouco antes de rolar até o convite.
  */
+function initializeEnvelope() {
+  const envelope = document.getElementById('envelope');
+  const invitation = document.getElementById('invitation');
+  const hint = document.getElementById('hint');
+
+  envelope.addEventListener('click', () => {
+    // Evita repetir a animação em cliques posteriores.
+    if (envelope.classList.contains('open')) {
+      return;
+    }
+
+    envelope.classList.add('open');
+    hint.textContent = 'Com carinho, para você ♡';
+
+    // Primeiro deixa a carta visível; depois ativa sua transição de entrada.
+    setTimeout(() => {
+      invitation.style.display = 'block';
+
+      requestAnimationFrame(() => {
+        invitation.classList.add('show');
+      });
+
+      // Centraliza o convite na tela para facilitar a leitura.
+      setTimeout(() => {
+        invitation.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 350);
+    }, 950);
+  });
+}
+
+// -----------------------------------------------------------------------
+// 03. Confirmação de presença pelo WhatsApp
+// -----------------------------------------------------------------------
+
+/**
+ * Pede o nome e a resposta do convidado.
+ * Depois, abre o WhatsApp com uma mensagem previamente preenchida.
+ *
+ * Importante: o usuário ainda precisa escolher um contato e enviar
+ * a mensagem. Este botão não envia mensagens automaticamente.
+ */
 // Redirecionamento direto para confirmação pelo WhatsApp
 function initializeRsvp() {
   const rsvpButton = document.getElementById('rsvp');
